@@ -159,7 +159,10 @@ export function MikorizaActions() {
         },
         { signal },
       ),
-    ]);
+    ]).catch((error: unknown) => {
+      if (signal.aborted) return;
+      throw error;
+    });
 
     return () => controller.abort();
   }, []);
