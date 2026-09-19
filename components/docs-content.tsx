@@ -54,7 +54,7 @@ export function DocsContent() {
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,rgba(200,240,74,0.06)_0%,transparent_42%),radial-gradient(ellipse_at_center,rgba(9,10,8,0.2)_0%,rgba(9,10,8,0.55)_100%)]" />
       <div className="grain pointer-events-none absolute inset-0 z-[2]" />
 
-      <header className="sticky top-0 z-30 border-b border-line/80 bg-background/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-line/80 bg-background/92 backdrop-blur-xl">
         <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
           <Link
             href="/"
