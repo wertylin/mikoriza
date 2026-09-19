@@ -6,6 +6,7 @@ import {
   HANDSHAKE_SNIPPET,
   LIVE_ALLIANCES,
   MIKORIZA_TOOLS,
+  NODE_MANIFEST_SNIPPET,
   PROTOCOL_VERSION,
   RAVEN_SNIPPET,
   REGISTER_SNIPPET,
@@ -416,6 +417,70 @@ export function DocsContent() {
                 ))}
               </ol>
             </Section>
+
+            {/* Node manifest subsection — no new section number, lives inside Graft */}
+            <div className="rounded-2xl border border-line/80 bg-panel/50 p-5">
+              <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.2em] text-spore">
+                node manifest · register your project
+              </p>
+              <p className="mb-4 text-sm leading-6">
+                Once you have grafted and your node is live, register it by
+                opening a PR with a manifest file. No token required — the
+                registry is a public directory in this repo.
+              </p>
+              <CopyCode
+                code={NODE_MANIFEST_SNIPPET}
+                lang="json"
+                filename="data/nodes/<alliance>/<G-address>.json"
+              />
+              <div className="mt-4 overflow-hidden rounded-xl border border-line/80">
+                <table className="w-full text-left text-sm">
+                  <tbody className="divide-y divide-line/80">
+                    <tr>
+                      <th className="w-32 bg-panel/50 px-4 py-3 font-mono text-[11px] font-normal uppercase tracking-[0.14em] text-muted">
+                        path
+                      </th>
+                      <td className="px-4 py-3 font-mono text-[12px] text-foreground/80">
+                        data/nodes/{"<alliance>/<G-address>.json"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="bg-panel/50 px-4 py-3 font-mono text-[11px] font-normal uppercase tracking-[0.14em] text-muted">
+                        PR title
+                      </th>
+                      <td className="px-4 py-3 font-mono text-[12px] text-foreground/80">
+                        {"node: <app> (<alliance>)"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="bg-panel/50 px-4 py-3 font-mono text-[11px] font-normal uppercase tracking-[0.14em] text-muted">
+                        writes
+                      </th>
+                      <td className="px-4 py-3 text-foreground/80">
+                        One file per node. Our server never writes and never
+                        holds a token.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-sm leading-6">
+                Use the{" "}
+                <code className="font-mono text-[13px] text-spore">
+                  node_manifest
+                </code>{" "}
+                WebMCP tool to build the JSON, and{" "}
+                <code className="font-mono text-[13px] text-spore">
+                  node_list
+                </code>{" "}
+                to read registered nodes for an alliance. The alliance detail
+                page also has a built-in{" "}
+                <span className="font-mono text-[13px] text-foreground">
+                  register your project
+                </span>{" "}
+                panel that generates and copies the manifest for you.
+              </p>
+            </div>
 
             <Section id="raven" num="08" title="Raven">
               <p>

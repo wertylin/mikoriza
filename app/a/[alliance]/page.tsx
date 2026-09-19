@@ -3,6 +3,8 @@ import Link from "next/link";
 import { AllianceDetail } from "@/components/alliance-detail";
 import { fetchAllianceData } from "@/lib/soroban-alliance";
 import type { AllianceData } from "@/lib/soroban-alliance";
+import { fetchNodesForAlliance } from "@/lib/nodes";
+import type { NodeManifest } from "@/lib/nodes";
 
 export async function generateMetadata(
   props: PageProps<"/a/[alliance]">,
@@ -16,11 +18,18 @@ export default async function AlliancePage(props: PageProps<"/a/[alliance]">) {
 
   let data: AllianceData | null = null;
   let error: string | null = null;
+  let nodes: NodeManifest[] = [];
 
   try {
     data = await fetchAllianceData(alliance);
   } catch (err) {
     error = err instanceof Error ? err.message : String(err);
+  }
+
+  try {
+    nodes = await fetchNodesForAlliance(alliance);
+  } catch {
+    // non-fatal; show empty node list
   }
 
   return (
@@ -45,7 +54,7 @@ export default async function AlliancePage(props: PageProps<"/a/[alliance]">) {
       <div className="grain pointer-events-none absolute inset-0 z-[2]" />
 
       <main className="relative z-10 pt-20">
-        <AllianceDetail data={data} error={error} />
+        <AllianceDetail data={data} error={error} nodes={nodes} />
       </main>
     </div>
   );

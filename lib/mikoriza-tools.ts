@@ -41,4 +41,14 @@ export const TOOL_DEFS: { name: string; description: string }[] = [
     description:
       "Navigate client-side to the alliance detail page /a/<id>. Returns { opened, href }.",
   },
+  {
+    name: "node_manifest",
+    description:
+      "Build a node manifest JSON for registering a project in a mikoriza alliance. Returns the manifest JSON, target file path, and PR instructions. Read-only helper — does not write anything.",
+  },
+  {
+    name: "node_list",
+    description:
+      "List registered node manifests for a mikoriza alliance. Fetches from the public GitHub-hosted manifest store. Returns { alliance, nodes: [...] }.",
+  },
 ];

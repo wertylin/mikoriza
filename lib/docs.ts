@@ -116,5 +116,18 @@ export const TOOL_SHAPE_SNIPPET = `{
   }
 }`;
 
+export const NODE_MANIFEST_SNIPPET = `{
+  "protocol": "${PROTOCOL_VERSION}",
+  "alliance": "<alliance-id>",
+  "member": "<G-address>",
+  "app": "<app name>",
+  "repo": "https://github.com/owner/repo",
+  "origin": "https://app.example.com",
+  "capabilities": [
+    { "name": "quote_swap", "description": "Quote a swap", "readOnly": true }
+  ],
+  "submitted_at": "<ISO 8601>"
+}`;
+
 export const LIVE_ALLIANCES = ALLIANCES;
 export { PROTOCOL_VERSION };

@@ -1,0 +1,16 @@
+{
+  "protocol": "mikoriza/0.1-mock",
+  "alliance": "istanbul-2026",
+  "member": "GA6WJNDAL2KCSSKJ5RB2K4GEIQOQMVPXBJVBG2UGLK5CK2NYP7HKOBIQ",
+  "app": "Demo Node",
+  "repo": "https://github.com/wertylin/mikoriza",
+  "origin": "https://mikoriza.vercel.app",
+  "capabilities": [
+    {
+      "name": "demo_node",
+      "description": "Demo capability registered as part of the mikoriza example node",
+      "readOnly": true
+    }
+  ],
+  "submitted_at": "2026-09-19T00:00:00Z"
+}

@@ -291,6 +291,114 @@ export function MikorizaToolsProvider({
         },
         { signal },
       ),
+
+      ctx.registerTool(
+        {
+          name: "node_manifest",
+          description: TOOL_DEFS.find((t) => t.name === "node_manifest")!
+            .description,
+          inputSchema: {
+            type: "object",
+            properties: {
+              alliance: { type: "string", description: "Alliance id" },
+              member: {
+                type: "string",
+                description: "Your Stellar G-address (56 chars)",
+              },
+              app: { type: "string", description: "App name" },
+              repo: { type: "string", description: "Public repository URL" },
+              origin: {
+                type: "string",
+                description: "HTTPS origin where the node is live",
+              },
+              capabilities: {
+                type: "array",
+                description: "Tools the node exposes",
+                items: {
+                  type: "object",
+                  properties: {
+                    name: { type: "string" },
+                    description: { type: "string" },
+                    readOnly: { type: "boolean" },
+                  },
+                  required: ["name", "description"],
+                },
+              },
+            },
+            required: ["alliance", "member", "app", "repo", "origin", "capabilities"],
+          },
+          annotations: { readOnlyHint: true },
+          execute: (input) => {
+            const alliance = String(input.alliance ?? "");
+            const member = String(input.member ?? "");
+            const app = String(input.app ?? "");
+            const repo = String(input.repo ?? "");
+            const origin = String(input.origin ?? "");
+            const caps = Array.isArray(input.capabilities)
+              ? (input.capabilities as { name: string; description: string; readOnly?: boolean }[])
+              : [];
+
+            const manifest = {
+              protocol: PROTOCOL_VERSION,
+              alliance,
+              member,
+              app,
+              repo,
+              origin,
+              capabilities: caps,
+              submitted_at: new Date().toISOString(),
+            };
+
+            const path = `data/nodes/${alliance}/${member}.json`;
+
+            return toolText(
+              JSON.stringify(
+                {
+                  manifest,
+                  path,
+                  pr_title: `node: ${app} (${alliance})`,
+                  pr_instructions: [
+                    `1. Fork https://github.com/wertylin/mikoriza`,
+                    `2. Create file: ${path}`,
+                    `3. Paste the manifest JSON (replace submitted_at with current ISO timestamp)`,
+                    `4. Open PR with title: node: ${app} (${alliance})`,
+                  ].join("\n"),
+                  folder_url: `https://github.com/wertylin/mikoriza/tree/main/data/nodes/${alliance}`,
+                },
+                null,
+                2,
+              ),
+            );
+          },
+        },
+        { signal },
+      ),
+
+      ctx.registerTool(
+        {
+          name: "node_list",
+          description: TOOL_DEFS.find((t) => t.name === "node_list")!
+            .description,
+          inputSchema: {
+            type: "object",
+            properties: {
+              alliance: {
+                type: "string",
+                description: "Alliance id to list nodes for",
+              },
+            },
+            required: ["alliance"],
+          },
+          annotations: { readOnlyHint: true, idempotentHint: true },
+          execute: async (input) => {
+            const alliance = String(input.alliance ?? "");
+            const res = await fetch(`/api/nodes/${alliance}`);
+            const data = await res.json();
+            return toolText(JSON.stringify(data, null, 2));
+          },
+        },
+        { signal },
+      ),
     ]).catch((error: unknown) => {
       if (signal.aborted) return;
       throw error;
