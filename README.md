@@ -23,6 +23,7 @@ The page is the server: agents call tools in-page through `document.modelContext
 - Docs: https://www.mikoriza.org/docs
 - Istanbul 2026 alliance: https://www.mikoriza.org/a/istanbul-2026
 
+
 ## WebMCP surface
 
 Every Mikoriza page exposes a stable tool surface including:

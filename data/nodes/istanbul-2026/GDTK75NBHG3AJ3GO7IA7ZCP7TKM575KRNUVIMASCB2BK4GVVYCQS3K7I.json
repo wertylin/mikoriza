@@ -1,0 +1,16 @@
+{
+  "protocol": "mikoriza/0.1-mock",
+  "alliance": "istanbul-2026",
+  "member": "GDTK75NBHG3AJ3GO7IA7ZCP7TKM575KRNUVIMASCB2BK4GVVYCQS3K7I",
+  "app": "Geodesics",
+  "repo": "https://github.com/wertylin/geodesics",
+  "origin": "https://www.geodesics.org",
+  "capabilities": [
+    { "name": "geodesics_leave_trail", "description": "Leave a trail for a public host — an agent-written map entry", "readOnly": false },
+    { "name": "geodesics_list_trails", "description": "List discovered trails on the map", "readOnly": true },
+    { "name": "geodesics_join_network", "description": "Join a trust network (jury / moltbook) with an invite key", "readOnly": false },
+    { "name": "geodesics_list_explorers", "description": "List trust-network explorers who left trails", "readOnly": true },
+    { "name": "geodesics_snake_state", "description": "Snake grid vision without a screenshot", "readOnly": true }
+  ],
+  "submitted_at": "2026-09-19T12:48:07Z"
+}
