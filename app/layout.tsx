@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Instrument_Serif, Outfit } from "next/font/google";
+import { MikorizaToolsProvider } from "@/components/mikoriza-tools-provider";
 import "./globals.css";
 
 const sans = Outfit({
@@ -34,7 +35,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${sans.variable} ${serif.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-dvh bg-background text-foreground">{children}</body>
+      <body className="min-h-dvh bg-background text-foreground">
+        <MikorizaToolsProvider>{children}</MikorizaToolsProvider>
+      </body>
     </html>
   );
 }
